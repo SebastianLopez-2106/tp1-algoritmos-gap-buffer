@@ -1,4 +1,7 @@
-class BufferGap <E> {
+import java.util.Iterator;
+
+
+class BufferGap <E> implements Iterable<E>{
     final int TAM_INICIAL = 16;
 
     private int capacidad;          // 'inicioHueco' -> Cursor (donde se va a escribir)
@@ -30,13 +33,17 @@ class BufferGap <E> {
         if ( inicioHueco == finHueco ) {                                 // la capacidad se duplica
             E [] tempList = (E[]) new Object[capacidad * 2];    // crea una lista temporal
 
-            for (int i = 0; i < inicioHueco; i++) {         // recorrer los elementos antes del cursor
+            for ( int i = 0; i < inicioHueco; i++ ) {         // recorrer los elementos antes del cursor
                 tempList[i] = datos[i];
+
+                desplazamientos += 1; // <<<<<<<<<<<<<<<<<<<<<<<<<<<< desplazamiento <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             }
 
             // si luego del buffer existian elementos, colocarlos al final de la nueva lista
-            for (int i = finHueco; i < capacidad; i++) {
+            for ( int i = finHueco; i < capacidad; i++ ) {
                 tempList[i + capacidad] = datos[i];     // el nuevo buffer tiene el tamaño de 'capacidad' anterior
+
+                desplazamientos += 1; // <<<<<<<<<<<<<<<<<<<<<<<<<<<< desplazamiento <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
             }
 
             datos = tempList;
@@ -48,11 +55,168 @@ class BufferGap <E> {
 
 
 
-    public E borrar () {
+    public E borrar () throws BufferVacioException {
         /* Elimina y retorna el elemento inmediatamente anterior al cursor */
 
+        if ( inicioHueco == 0 ) {
+            throw new BufferVacioException("No eisten elementos detras del cursor");
+        }
 
-    }
+        inicioHueco -= 1;
+        return datos[inicioHueco];
+    } // <-> end borrar method
 
 
+
+    public void moverCursor (int delta) throws BufferIndexException {
+        /*
+        * Desplaza el cursor delta posiciones (negativo hacia la izquierda, positivo hacia la derecha),
+        * trasladando los elementos necesarios de un lado del hueco al otro.
+        * Lanza una excepción no chequeada si el cursor quedaría fuera de [0, size()].
+        */
+
+        // si el cursor cae fuera del rango valido [0; size()]
+        if ( inicioHueco + delta < 0 || this.size() < inicioHueco + delta )
+            throw new BufferIndexException("indice fuera de rango");
+
+        // mueve el cursor a la izquierda
+        if ( delta <= 0) {
+            for (int i = 1; i <= -delta; i++) {
+                datos[ finHueco - i ] = datos[ inicioHueco - i ];
+            }
+
+        } else {
+            for (int i = 0; i <= delta; i++) {
+                datos[ inicioHueco + i ] = datos[ finHueco + i ];
+            }
+        } // end if
+
+        inicioHueco += delta;
+        finHueco += delta;
+
+    } // <-> end moverCursor method
+
+
+
+    public int posicionCursor () {
+        /* retorna la posicion logica del cursor */
+        return inicioHueco;
+    } // <-> end pisicionCursor method
+
+
+
+    public E get(int index) throws BufferIndexException {
+        /* retorna el elemento ubicado en la posicion logica 'index' */
+        if (index >= finHueco || index < 0) {
+            throw new BufferIndexException("indice fuera de rango");
+        }
+
+
+        if (index < inicioHueco) {
+            return datos[index];
+        } else {
+            return datos[(index - inicioHueco - 1) + finHueco];
+        }
+    } // <-> end get method
+
+
+
+    public E set(E element, int index) throws BufferIndexException {
+        /* reemplaza un elemento existente por uno nuevo */
+        if (index >= finHueco || index < 0) {
+            throw new BufferIndexException("indice fuera de rango");
+        }
+
+
+        if (index < inicioHueco) {
+            E temp = datos[index];
+            datos[index] = element;
+            return temp;
+        } else {
+            E temp = datos[(index - inicioHueco - 1) + finHueco];
+            datos[index] = element;
+            return temp;
+        }
+    } // <-> end set method
+
+
+
+    public int size () {
+        /* retorna la cantidad de elementos almacenados */
+        return capacidad - (finHueco - inicioHueco);
+    } // <-> end size method
+
+
+
+    public int capacidad () {
+        /* retorna la capacidad del arreglo interno */
+        return capacidad;
+    } // <-> end capacidad method
+
+
+
+    public long desplazamientos () {
+        /* retorna la cantidad actual de desplazamientos */
+        return desplazamientos;
+    } // <-> end desplazamientos method
+
+
+
+    public void reiniciarDesplazamientos () {
+        desplazamientos = 0;
+    } // <-> end reiniciarDesplazamientos method
+
+
+
+
+    // Iterator ===============================================================>
+    @Override
+    public Iterator<E> iterator () {
+        /* Retorna un Iterator que recorre los elementos en orden lógico, salteando el hueco. */
+        return new BufferIterator();
+    } // end iterator method
+
+    private class BufferIterator implements Iterator<E> {
+        private int index = 0;
+
+        @Override
+        public boolean hasNext () {
+            if ( index < size()) {
+                return true;
+            } else {
+                return false;
+            }
+        } // end <--> hasNext method (override)
+
+        @Override
+        public E next (){
+            if (!hasNext()) {
+                return null;
+            }
+
+            if (index < inicioHueco) {
+                index += 1;
+                return datos[index - 1];
+            } else {
+                index += 1;
+                return datos[(index - inicioHueco - 2) + finHueco];
+            }
+        } // end <--> next method (override)
+    } // end <-> BufferIterator method (override)
+    // Iterator ==============================================================>
+
+
+
+    @Override
+    public String toString () {
+        /* Retorna el contenido en orden lógico, con el carácter ` */
+
+        String data = "`";
+        for (E element : datos) {
+            data += String.valueOf(element);
+        }
+        data += "`";
+
+        return data;
+    } // <-> end toString method (override)
 } // <> end BufferGap<E> class
