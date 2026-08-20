@@ -70,7 +70,7 @@ public class BufferGap <E> implements Iterable<E>{
 
 
 
-    public void moverCursor (int delta) throws BufferIndexException {
+    public void moverCursor (int delta) throws PosicionInvalidaException {
         /*
         * Desplaza el cursor delta posiciones (negativo hacia la izquierda, positivo hacia la derecha),
         * trasladando los elementos necesarios de un lado del hueco al otro.
@@ -79,7 +79,7 @@ public class BufferGap <E> implements Iterable<E>{
 
         // si el cursor cae fuera del rango valido [0; size()]
         if ( inicioHueco + delta < 0 || this.size() < inicioHueco + delta )
-            throw new BufferIndexException("indice fuera de rango");
+            throw new PosicionInvalidaException("indice fuera de rango");
 
         // mueve el cursor a la izquierda
         if ( delta <= 0) {
@@ -111,10 +111,10 @@ public class BufferGap <E> implements Iterable<E>{
 
 
 
-    public E get(int index) throws BufferIndexException {
+    public E get(int index) throws PosicionInvalidaException {
         /* retorna el elemento ubicado en la posicion logica 'index' */
         if (index >= this.size() || index < 0) {
-            throw new BufferIndexException("indice fuera de rango");
+            throw new PosicionInvalidaException("indice fuera de rango");
         }
 
 
@@ -127,10 +127,10 @@ public class BufferGap <E> implements Iterable<E>{
 
 
 
-    public E set(E element, int index) throws BufferIndexException {
+    public E set(E element, int index) throws PosicionInvalidaException {
         /* reemplaza un elemento existente por uno nuevo */
         if (index >= this.size() || index < 0) {
-            throw new BufferIndexException("indice fuera de rango");
+            throw new PosicionInvalidaException("indice fuera de rango");
         }
 
 
