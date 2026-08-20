@@ -1,7 +1,7 @@
 import java.util.Iterator;
 
 
-class BufferGap <E> implements Iterable<E>{
+public class BufferGap <E> implements Iterable<E>{
     final int TAM_INICIAL = 16;
 
     private int capacidad;          // 'inicioHueco' -> Cursor (donde se va a escribir)
@@ -11,6 +11,7 @@ class BufferGap <E> implements Iterable<E>{
     private E [] datos;             // arreglo de datos principal
 
 
+    @SuppressWarnings("unchecked")
     public BufferGap () {
         datos = (E[]) new Object[TAM_INICIAL]; // realizamos un casting de Object -> E
         inicioHueco = 0;
@@ -20,6 +21,7 @@ class BufferGap <E> implements Iterable<E>{
 
 
 
+    @SuppressWarnings("unchecked")
     public void insertar (E element) {
         /*
         * Inserta obj en la posición del cursor y avanza el cursor una posición. Si el hueco
@@ -86,7 +88,7 @@ class BufferGap <E> implements Iterable<E>{
             }
 
         } else {
-            for (int i = 0; i <= delta; i++) {
+            for (int i = 0; i < delta; i++) {
                 datos[ inicioHueco + i ] = datos[ finHueco + i ];
             }
         } // end if
