@@ -2,7 +2,7 @@ import java.util.Iterator;
 
 
 public class BufferGap <E> implements Iterable<E>{
-    final int TAM_INICIAL = 16;
+    private final int TAM_INICIAL = 16;
 
     private int capacidad;          // 'inicioHueco' -> Cursor (donde se va a escribir)
     private int inicioHueco;        // 'capacidad' empieza desde el 1 y es la capacidad de 'datos'
@@ -83,15 +83,19 @@ public class BufferGap <E> implements Iterable<E>{
 
         // mueve el cursor a la izquierda
         if ( delta <= 0) {
+            desplazamientos += -delta; // <<<<<<<<<<<<<<<<<<<<<<<<<<<< desplazamiento <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
             for (int i = 1; i <= -delta; i++) {
                 datos[ finHueco - i ] = datos[ inicioHueco - i ];
             }
 
         } else {
+            desplazamientos += delta; // <<<<<<<<<<<<<<<<<<<<<<<<<<<< desplazamiento <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
             for (int i = 0; i < delta; i++) {
                 datos[ inicioHueco + i ] = datos[ finHueco + i ];
             }
-        } // end if
+        } // end if else
 
         inicioHueco += delta;
         finHueco += delta;
@@ -109,7 +113,7 @@ public class BufferGap <E> implements Iterable<E>{
 
     public E get(int index) throws BufferIndexException {
         /* retorna el elemento ubicado en la posicion logica 'index' */
-        if (index >= finHueco || index < 0) {
+        if (index >= this.size() || index < 0) {
             throw new BufferIndexException("indice fuera de rango");
         }
 
@@ -117,7 +121,7 @@ public class BufferGap <E> implements Iterable<E>{
         if (index < inicioHueco) {
             return datos[index];
         } else {
-            return datos[(index - inicioHueco - 1) + finHueco];
+            return datos[index + (finHueco - inicioHueco)];
         }
     } // <-> end get method
 
@@ -125,7 +129,7 @@ public class BufferGap <E> implements Iterable<E>{
 
     public E set(E element, int index) throws BufferIndexException {
         /* reemplaza un elemento existente por uno nuevo */
-        if (index >= finHueco || index < 0) {
+        if (index >= this.size() || index < 0) {
             throw new BufferIndexException("indice fuera de rango");
         }
 
@@ -135,8 +139,8 @@ public class BufferGap <E> implements Iterable<E>{
             datos[index] = element;
             return temp;
         } else {
-            E temp = datos[(index - inicioHueco - 1) + finHueco];
-            datos[index] = element;
+            E temp = datos[index + (finHueco - inicioHueco)];
+            datos[index + (finHueco - inicioHueco)] = element;
             return temp;
         }
     } // <-> end set method
@@ -165,6 +169,7 @@ public class BufferGap <E> implements Iterable<E>{
 
 
     public void reiniciarDesplazamientos () {
+        /* reinicia el desplazamiento +_+ */
         desplazamientos = 0;
     } // <-> end reiniciarDesplazamientos method
 
@@ -183,17 +188,14 @@ public class BufferGap <E> implements Iterable<E>{
 
         @Override
         public boolean hasNext () {
-            if ( index < size()) {
-                return true;
-            } else {
-                return false;
-            }
+            return index < size();
         } // end <--> hasNext method (override)
 
         @Override
         public E next (){
+
             if (!hasNext()) {
-                return null;
+                throw new java.util.NoSuchElementException();
             }
 
             if (index < inicioHueco) {
@@ -201,8 +203,9 @@ public class BufferGap <E> implements Iterable<E>{
                 return datos[index - 1];
             } else {
                 index += 1;
-                return datos[(index - inicioHueco - 2) + finHueco];
+                return datos[(index - 1) + (finHueco - inicioHueco)]; // index + tamaño del hueco
             }
+
         } // end <--> next method (override)
     } // end <-> BufferIterator method (override)
     // Iterator ==============================================================>
@@ -214,11 +217,30 @@ public class BufferGap <E> implements Iterable<E>{
         /* Retorna el contenido en orden lógico, con el carácter ` */
 
         String data = "`";
-        for (E element : datos) {
+        for (E element : this) {
             data += String.valueOf(element);
         }
         data += "`";
 
         return data;
     } // <-> end toString method (override)
+
+
+
+
+    public void view () {
+        System.out.println("datos: ");
+        int cont = 0;
+        for (E element : datos) {
+            if (cont == inicioHueco || cont == finHueco - 1) {
+                System.out.print("| <" + element + "> |");
+            } else {
+                System.out.print("| " + element + " |");
+            }
+            cont++;
+        }
+        System.out.println();
+    }
+
+
 } // <> end BufferGap<E> class
