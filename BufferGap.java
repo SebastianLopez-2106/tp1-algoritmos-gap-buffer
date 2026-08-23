@@ -111,6 +111,13 @@ public class BufferGap <E> implements Iterable<E>{
 
 
 
+    public int get_finHueco () {
+        /* retorna el indice de finHueco */
+        return finHueco;
+    }
+
+
+
     public E get(int index) throws PosicionInvalidaException {
         /* retorna el elemento ubicado en la posicion logica 'index' */
         if (index >= this.size() || index < 0) {
