@@ -8,44 +8,58 @@ public class ComandoBorrar implements Comando {
     public ComandoBorrar (BufferGap<Character> bf) {
         buffer = bf;
         state = false;
-        this.ejecutar();
     } // <-> end ComandoBorrar constructor
 
 
-    public boolean ejecutar() {
+    public void ejecutar() {
         /* borra un elemento */
-        if (!state) {
 
+        if (!state) { // si no se ejecuto
             try {
                 character = buffer.borrar();
                 state = true;
-                return true;
-            } catch (Exception e) {
-                return false;
+
+            } catch (BufferVacioException e) {
+                System.out.println(e);
             }
         }
 
-        return false;
     } // <-> end ejecutar method
 
 
 
-    public boolean deshacer () {
+    public void deshacer () {
         /* inserta el elemento borrado por ejecutar */
-        if (state) {
+
+        if (state) { // si se ejecuto se puede deshacer
             buffer.insertar(character);
             state = false;
-            return true;
         }
-        return false;
+
     } // <-> end deshacer method
 
 
 
     public String descripcion () {
-        return
-        "pass"
-        ;
+        if (state) { // si se borro
+            return "deleted '" + character + "'";
+        } else {
+
+            if (character == null) { // si aun no se obtuvo el caracter
+
+                if (buffer.posicionCursor() > 0) { // si el cursor no esta en el indice 0
+                    return "delete '" + buffer.get(buffer.posicionCursor() - 1) + "'";
+
+                } else { // si esta en el indice 0 retorna un texto generico
+                    return "delete character";
+                }
+
+            } else { // si ya se tiene el caracter
+                return "delete '" + character + "'";
+            }
+
+        } // end if-else
+
     } // <-> end descripcion method
 
 } // <> end ComandoBorrar class

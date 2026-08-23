@@ -1,51 +1,52 @@
 public class ComandoMoverCursor implements Comando {
 
-    private int delta;            // elemento a insertar
+    private int delta;      // pasos a mover el cursor (indice logico)
     private BufferGap<Character> buffer;
-    private boolean state;  // estado, true (hecho) y false (deshecho)
+    private boolean state;  // estado, true (hecho) y false (deshecho o no hecho)
 
     public ComandoMoverCursor (int delta, BufferGap<Character> bf) {
         this.delta = delta;
         buffer = bf;
         state = false;
-        this.ejecutar();
-    } // <-> end ComandoInsertar constructor
+    } // <-> end ComandoMoverCursor constructor
 
 
 
-    public boolean ejecutar () {
+    public void ejecutar () {
         /* mueve el cursor */
-        if (!state) {
+
+        if (!state) { // si no se ejecuto
             try {
                 buffer.moverCursor(delta);
                 state = true;
-                return true;
-            } catch (Exception e) {
-                return false;
+            } catch (PosicionInvalidaException e) {
+                System.out.println(e);
             }
-        }
-        return false;
+        } // end if
     } // <-> end ejecutar method
 
 
-    public boolean deshacer () {
+    public void deshacer () {
         /* devuelve el cursor a su posicion anterior */
-        if (state) {
+
+        if (state) { // si ya se ejecuto se puede deshacer
             try {
                 buffer.moverCursor(-delta);
                 state = false;
-                return true;
-            } catch (Exception e) {
-                return false;
+
+            } catch (PosicionInvalidaException e) {
+                System.out.println(e);
             }
-        }
-        return false;
+        }// end if
+
     } // <-> end deshacer method
 
 
     public String descripcion () {
-        return
-        "pass"
-        ;
+        if (state) { // si se ejecuto
+            return "moved " + delta + " positions";
+        } else {
+            return "returns " + -delta + " positions";
+        }
     } // <-> end descripcion method
 }
