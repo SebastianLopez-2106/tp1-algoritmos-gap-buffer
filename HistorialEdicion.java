@@ -15,7 +15,30 @@ public class HistorialEdicion {
     } // <-> end HistorialEdicion constructor
 
 
+    public void ejecutar(Comando c) {
+        /*
+         * Ejecuta el comando recibido y lo apila en Deshacer, luego vacía la pila Rehacer
+         * ya que al ejecutar un nuevo comando el futuro que estaba en deshacer ya no es válido.
+         */
+        c.ejecutar();
+        pilaDeshacer.apilar(c);
+        pilaRehacer = new PilaES<>();  
+    }
 
+    public boolean deshacer(){
+        /*
+         *    Deshace el ultimo comando realizo(solamente si hay algo para deshacer o sino retorna falso) y lo pasa a la pila de Rehacer.
+         */
+        if(pilaDeshacer.estaVacia()){
+            return false;
+        }
+        Comando c = pilaDeshacer.desapilar();
+        c.deshacer();
+        pilarRehacer.apilar(c);
+        return true;
+    }
+
+    
     public boolean rehacer () {
         /*
         *Vuelve a ejecutar el último comando deshecho y lo devuelve a la pila de deshacer.
@@ -29,7 +52,10 @@ public class HistorialEdicion {
         return false;
     } // <-> end rehacer method
 
-
+    public int sizeDeshacer(){
+        /* retorna cantidad de elementos que contiene pilaDeshacer*/
+        return pilaDeshacer.size();
+    }
 
     public int sizeRehacer () {
         /* retorna la cantidad de elementos que contiene pilaCtrlY */
