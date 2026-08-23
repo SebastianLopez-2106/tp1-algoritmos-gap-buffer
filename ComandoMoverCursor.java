@@ -1,3 +1,5 @@
+/* comando para mover el cursor del bufferlist */
+
 public class ComandoMoverCursor implements Comando {
 
     private int delta;      // pasos a mover el cursor (indice logico)

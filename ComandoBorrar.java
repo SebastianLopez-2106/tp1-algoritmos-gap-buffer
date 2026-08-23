@@ -1,8 +1,10 @@
+/* comando para borrar caracteres en el bufferlist */
+
 public class ComandoBorrar implements Comando {
 
-    private Character character;            // elemento a insertar
+    private Character character;    // elemento a insertar
     private BufferGap<Character> buffer;
-    private boolean state;  // estado, true (hecho) y false (deshecho)
+    private boolean state;          // estado, true (hecho) y false (deshecho)
 
 
     public ComandoBorrar (BufferGap<Character> bf) {

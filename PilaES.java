@@ -1,3 +1,5 @@
+/* pila enlazada generica */
+
 public class PilaES <E> {
 
     private class Nodo {

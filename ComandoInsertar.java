@@ -1,8 +1,10 @@
+/* comando para insertar caracteres en el bufferlist */
+
 public class ComandoInsertar implements Comando {
 
-    private Character character;            // elemento a insertar
+    private Character character;    // elemento a insertar
     private BufferGap<Character> buffer;
-    private boolean state;  // estado, true (hecho) y false (deshecho o no hecho)
+    private boolean state;          // estado, true (hecho) y false (deshecho o no hecho)
 
     public ComandoInsertar (Character element, BufferGap<Character> bf) {
         character = element;

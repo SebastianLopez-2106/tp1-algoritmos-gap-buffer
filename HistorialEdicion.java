@@ -1,5 +1,9 @@
+/* maneja la logica para el historial de cambios (Ctrl-y/Ctrl-z) */
+
 public class HistorialEdicion {
     private BufferGap<Character> buffer;    // instancia de BufferGap sobre el cual realizar el historial
+
+    /* las pilas guardan objetos del tipo comando que permiten interactuar con la lista del buffer */
     private PilaES<Comando> pilaDeshacer;      // pila para deshacer (Ctrl-z)
     private PilaES<Comando> pilaRehacer;      // pila para rehacer (Ctrl-y)
 
