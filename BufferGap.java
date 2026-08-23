@@ -32,7 +32,7 @@ public class BufferGap <E> implements Iterable<E>{
         inicioHueco += 1;
 
         // si el buffer se queda sin espacio
-        if ( inicioHueco == finHueco ) {                                 // la capacidad se duplica
+        if ( inicioHueco == finHueco ) {                        // la capacidad se duplica
             E [] tempList = (E[]) new Object[capacidad * 2];    // crea una lista temporal
 
             for ( int i = 0; i < inicioHueco; i++ ) {         // recorrer los elementos antes del cursor
@@ -215,12 +215,23 @@ public class BufferGap <E> implements Iterable<E>{
     @Override
     public String toString () {
         /* Retorna el contenido en orden lógico, con el carácter ` */
+        String data = "'";
 
-        String data = "`";
+        if (this.size() == 0) {
+            data += "|";
+        }
+
+
+        int cont = 1;
         for (E element : this) {
             data += String.valueOf(element);
+
+            if (cont == inicioHueco) {
+                data += String.valueOf('|');
+            }
+            cont++;
         }
-        data += "`";
+        data += "'";
 
         return data;
     } // <-> end toString method (override)
