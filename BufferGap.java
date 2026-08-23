@@ -4,8 +4,8 @@ import java.util.Iterator;
 public class BufferGap <E> implements Iterable<E>{
     private final int TAM_INICIAL = 16;
 
-    private int capacidad;          // 'inicioHueco' -> Cursor (donde se va a escribir)
-    private int inicioHueco;        // 'capacidad' empieza desde el 1 y es la capacidad de 'datos'
+    private int capacidad;          // 'capacidad' empieza desde el 1 y es la capacidad de 'datos'
+    private int inicioHueco;        // 'inicioHueco' -> Cursor (donde se va a escribir)
     private int finHueco;           // 'finHueco' es el primer espacio luego del hueco
     private long desplazamientos;   // contador de cuantas veces se hicieron movimientos fisicos
     private E [] datos;             // arreglo de datos principal

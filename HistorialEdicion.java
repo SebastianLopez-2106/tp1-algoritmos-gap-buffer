@@ -4,8 +4,8 @@ public class HistorialEdicion {
     private BufferGap<Character> buffer;    // instancia de BufferGap sobre el cual realizar el historial
 
     /* las pilas guardan objetos del tipo comando que permiten interactuar con la lista del buffer */
-    private PilaES<Comando> pilaDeshacer;      // pila para deshacer (Ctrl-z)
-    private PilaES<Comando> pilaRehacer;      // pila para rehacer (Ctrl-y)
+    private PilaES<Comando> pilaDeshacer;   // pila para deshacer (Ctrl-z)
+    private PilaES<Comando> pilaRehacer;    // pila para rehacer (Ctrl-y)
 
 
     public HistorialEdicion (BufferGap<Character> bf) {
@@ -15,6 +15,7 @@ public class HistorialEdicion {
     } // <-> end HistorialEdicion constructor
 
 
+
     public void ejecutar(Comando c) {
         /*
          * Ejecuta el comando recibido y lo apila en Deshacer, luego vacía la pila Rehacer
@@ -22,8 +23,10 @@ public class HistorialEdicion {
          */
         c.ejecutar();
         pilaDeshacer.apilar(c);
-        pilaRehacer = new PilaES<>();  
+        pilaRehacer = new PilaES<>();
     }
+
+
 
     public boolean deshacer(){
         /*
@@ -34,11 +37,12 @@ public class HistorialEdicion {
         }
         Comando c = pilaDeshacer.desapilar();
         c.deshacer();
-        pilarRehacer.apilar(c);
+        pilaRehacer.apilar(c);
         return true;
     }
 
-    
+
+
     public boolean rehacer () {
         /*
         *Vuelve a ejecutar el último comando deshecho y lo devuelve a la pila de deshacer.
@@ -52,10 +56,14 @@ public class HistorialEdicion {
         return false;
     } // <-> end rehacer method
 
+
+
     public int sizeDeshacer(){
         /* retorna cantidad de elementos que contiene pilaDeshacer*/
         return pilaDeshacer.size();
     }
+
+
 
     public int sizeRehacer () {
         /* retorna la cantidad de elementos que contiene pilaCtrlY */
