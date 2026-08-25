@@ -108,9 +108,27 @@ public class BufferHistoryManager {
     /**
      * @return descripcion del siguiente elemento a rehacer
      */
-        public String topeRehacer () {
+    public String topeRehacer () {
         /* retorna la descripcion del ultimo elemento de la pilaRehacer */
         return history.topeRehacer();
     } // <-> end topeRehacer method
+
+
+    /**
+     * retorna el buffer sobre el cual se esta trabajando
+     * @return BufferGap<Character>
+     */
+    public BufferGap<Character> getBufferGap () {
+        return this.bf;
+    } // <-> end getBufferGap method
+
+
+    /**
+     * retorna el historial sobre el cual se esta trabajando
+     * @return HistorialEdicion
+     */
+    public HistorialEdicion getHistorialEdicion () {
+        return this.history;
+    } // <-> end getHistorialEdicion method
 
 } // <> end class
