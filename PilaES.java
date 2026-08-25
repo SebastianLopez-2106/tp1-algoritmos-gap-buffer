@@ -48,11 +48,16 @@ public class PilaES <E> {
 
     public void apilar (E data) {
         /* insert element */
-        Nodo nodo = new Nodo(data);
-        nodo.set_nextNodo(this.head.get_nextNodo());
-        this.head.set_nextNodo(nodo);
-
         this.size += 1;
+        Nodo nodo = new Nodo(data);
+        if ( this.head == null ) {
+            this.head = nodo;
+            return;
+        }
+
+        nodo.set_nextNodo(this.head);
+        this.head = nodo;
+
     } // <-> end apilar method
 
 

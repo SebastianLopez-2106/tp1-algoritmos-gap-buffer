@@ -69,14 +69,14 @@ public class TestBufferGap {
         */
 
         System.out.println("moverCursor(2)");
-        bf.moverCursor(2);
+        bf.moverCursor(2);                  // mueve el cursor al final
         showData(bf);
 
-        Character [] control = new Character[100000];
+        Character [] control = new Character[100000];   // para el control de orden
 
         // add random characters
         Random random = new Random();
-        for (int i = 1; i <= 100000; i++) {
+        for (int i = 1; i <= 100000; i++) { // añade un caracter a bf y a control
             Character c = Character.valueOf( (char) (random.nextInt(26) + 'a'));
             bf.insertar( c );
             control[i-1] = c;
@@ -95,8 +95,9 @@ public class TestBufferGap {
             cont++;
         } // end for
 
-        System.out.printf("\nErrores de orden: %d \ncapacidad(): %d\nsize(): %d\nfor-each: %d\n", errores_orden, bf.capacidad(), bf.size(), cont);
-
+        System.out.printf("\nErrores de orden: %d\ncapacidad(): %d\nsize(): %d\nfor-each: %d\n",
+                            errores_orden, bf.capacidad(), bf.size(), cont);
+        bf = null;
 
 
 

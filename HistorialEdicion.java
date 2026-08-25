@@ -6,7 +6,7 @@ public class HistorialEdicion {
     private PilaES<Comando> pilaRehacer;    // pila para rehacer (Ctrl-y)
 
 
-    public HistorialEdicion (BufferGap<Character> bf) {
+    public HistorialEdicion () {
         pilaDeshacer = new PilaES<Comando>();
         pilaRehacer = new PilaES<Comando>();
     } // <-> end HistorialEdicion constructor
@@ -66,5 +66,19 @@ public class HistorialEdicion {
         /* retorna la cantidad de elementos que contiene pilaCtrlY */
         return pilaRehacer.size();
     } // <-> end sizeRehacer method
+
+
+
+    public String topeDeshacer () {
+        /* retorna la descripcion del ultimo elemento de la pilaDeshacer */
+        return pilaDeshacer.tope().descripcion();
+    } // <-> end topeDeshacer method
+
+
+    public String topeRehacer () {
+        /* retorna la descripcion del ultimo elemento de la pilaRehacer */
+        return pilaRehacer.tope().descripcion();
+    } // <-> end topeRehacer method
+
 
 } // <> end HistorialEdicion class
