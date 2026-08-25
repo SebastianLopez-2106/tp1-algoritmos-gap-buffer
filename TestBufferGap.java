@@ -83,18 +83,19 @@ public class TestBufferGap {
         }
 
 
-        int cont = 0;
+        int cont = 0, errores_orden = 0;
         for (Character character : bf) {
 
             if (cont >= 4) { // saltea el 'Hola'
                 if ( !control[cont-4].equals(character) ) {   // imprime los indices donde hay errores de orden
+                    errores_orden++;
                     System.out.println("Error de orden en el indice: " + cont);
                 }
             }
             cont++;
         } // end for
 
-        System.out.printf("\ncapacidad(): %d\nsize(): %d\nfor-each: %d\n", bf.capacidad(), bf.size(), cont);
+        System.out.printf("\nErrores de orden: %d \ncapacidad(): %d\nsize(): %d\nfor-each: %d\n", errores_orden, bf.capacidad(), bf.size(), cont);
 
 
 
@@ -114,13 +115,15 @@ public class TestBufferGap {
                 bf2.insertar('#');
             }
 
-            bf2.moverCursor(-i*100000/2);            // cursor en n/2
+            long simple = (long) (i*100_000/2) * 10_000; // desplazamiento de la lista ingenua
+
+            bf2.moverCursor(-i*100000/2);           // cursor en n/2
             bf2.reiniciarDesplazamientos();         // reiniciar desplazamientos
 
             for (int j = 1; j <= 10000; j++) {      // carga 10.000 caracteres en n/2
                 bf2.insertar('#');
             }
-            System.out.printf("> P/n = %d\n    desplazamientos: %d\n\n", i*100000, bf2.desplazamientos());
+            System.out.printf("> P/n = %d\n    desplazamientos: %d\n    lista simple: %d\n\n", i*100000, bf2.desplazamientos(), simple);
 
         }// end for
 
