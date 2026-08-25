@@ -71,13 +71,19 @@ public class HistorialEdicion {
 
     public String topeDeshacer () {
         /* retorna la descripcion del ultimo elemento de la pilaDeshacer */
-        return pilaDeshacer.tope().descripcion();
+        if (pilaDeshacer.tope() != null) {
+            return pilaDeshacer.tope().descripcion();
+        }
+        return "no hay elementos para deshacer";
     } // <-> end topeDeshacer method
 
 
     public String topeRehacer () {
         /* retorna la descripcion del ultimo elemento de la pilaRehacer */
-        return pilaRehacer.tope().descripcion();
+        if (pilaRehacer.tope() != null) {
+            return pilaRehacer.tope().descripcion();
+        }
+        return "no hay elementos para rehacer";
     } // <-> end topeRehacer method
 
 
