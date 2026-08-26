@@ -109,6 +109,14 @@ public class TestBufferGap {
         * varios n con incrementos de 100.000, empezando de 100.000 hasta 1.000.000.
         */
 
+        /*
+        * EXPLICACIÓN DE RESULTADOS.
+        *
+        * BufferGap da 0 desplazamientos porque escribe directo en la celda libre del hueco (datos[inicioHueco])
+        * sin mover elementos vecinos. El arreglo simple requiere desplazar $N/2$ elementos a la derecha por
+        * cada una de las 10.000 inserciones, sumando $(N/2) \times 10.000$ movimientos físicos.
+        */
+
         for (int i = 1; i <= 10; i++) { // n = i*100.000
 
             BufferGap<Character> bf2 = new BufferGap<>();
