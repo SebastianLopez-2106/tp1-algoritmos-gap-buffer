@@ -1,8 +1,8 @@
 # Trabajo Práctico 1 – U1 (POO y TAD en Java)
 
-**Identificación del Grupo:** `g_t[q,r,s]##` *(Completar con sección y número)*
+### **Identificación del Grupo:** `g_t[q,r,s]##` *(Completar con sección y número)*
 
-**Integrantes (Apellido, Nombre, CIC, Sección):**
+### **Integrantes (Apellido, Nombre, CIC, Sección):**
 * [Apellido], [Nombre], [CIC], [Sección]
 * [Apellido], [Nombre], [CIC], [Sección]
 * [Apellido], [Nombre], [CIC], [Sección]
@@ -10,7 +10,7 @@
 ## Declaración de Honor
 *Declaramos bajo honor haber realizado este trabajo con honestidad académica, siguiendo las reglas establecidas en la primera clase de la materia, sin incurrir en copias ni apropiación de código de terceros no autorizados.*
 
----
+
 
 ## Decisiones de Diseño
 ### **1. Clase BufferHistoryManager**
@@ -42,7 +42,7 @@ Cuando el usuario ejecuta un comando nuevo (por ejemplo, insertar un nuevo cará
 * **`BufferVacioException` (Chequeada):** Borrar sobre un documento vacío es una situación predecible del flujo de uso normal (como mantener presionada la tecla *backspace*). Al ser chequeada, obligamos al código a preverla y capturarla adecuadamente sin detener el programa.
 * **`PosicionInvalidaException` (No Chequeada):** Intentar acceder o mover el cursor a una posición fuera de los límites lógicos del buffer representa un error de lógica de programación (un bug). Al derivar de `RuntimeException`, indicamos que es responsabilidad del programador prevenir esta llamada ilegítima.
 
----
+
 
 ## Análisis de Desplazamientos
 
