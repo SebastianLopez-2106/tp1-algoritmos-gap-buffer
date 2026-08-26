@@ -37,22 +37,19 @@ public class TestHistorial {
         System.out.println();
         
         // PASO 3: deshacer() → true
-        boolean r3 = history.deshacer();
-        System.out.println("3. deshacer() → " + r3);
+        System.out.println("3. deshacer() → " + history.deshacer());
         System.out.println("   Contenido: " + bf);
         System.out.println("   Deshacer: " + history.sizeDeshacer() + " | Rehacer: " + history.sizeRehacer());
         System.out.println();
         
         // PASO 4: deshacer() → true
-        boolean r4 = history.deshacer();
-        System.out.println("4. deshacer() → " + r4);
+        System.out.println("4. deshacer() → " +history.deshacer());
         System.out.println("   Contenido: " + bf);
         System.out.println("   Deshacer: " + history.sizeDeshacer() + " | Rehacer: " + history.sizeRehacer());
         System.out.println();
         
         // PASO 5: rehacer() → true
-        boolean r5 = history.rehacer();
-        System.out.println("5. rehacer() → " + r5);
+        System.out.println("5. rehacer() → " + history.rehacer());
         System.out.println("   Contenido: " + bf);
         System.out.println("   Deshacer: " + history.sizeDeshacer() + " | Rehacer: " + history.sizeRehacer());
         System.out.println();
@@ -65,15 +62,13 @@ public class TestHistorial {
         System.out.println();
         
         // PASO 7: rehacer() → false
-        boolean r7 = history.rehacer();
-        System.out.println("7. rehacer() → " + r7);
+        System.out.println("7. rehacer() → " + history.rehacer());
         System.out.println("   Contenido: " + bf);
         System.out.println("   Deshacer: " + history.sizeDeshacer() + " | Rehacer: " + history.sizeRehacer());
         System.out.println();
         
         // PASO 8: deshacer() → true
-        boolean r8 = history.deshacer();
-        System.out.println("8. deshacer() → " + r8);
+        System.out.println("8. deshacer() → " + history.deshacer());
         System.out.println("   Contenido: " + bf);
         System.out.println("   Deshacer: " + history.sizeDeshacer() + " | Rehacer: " + history.sizeRehacer());
         System.out.println();
@@ -86,22 +81,19 @@ public class TestHistorial {
         System.out.println();
         
         // PASO 10: deshacer() → true
-        boolean r10 = history.deshacer();
-        System.out.println("10. deshacer() → " + r10);
+        System.out.println("10. deshacer() → " + history.deshacer());
         System.out.println("    Contenido: " + bf);
         System.out.println("    Deshacer: " + history.sizeDeshacer() + " | Rehacer: " + history.sizeRehacer());
         System.out.println();
         
         // PASO 11: deshacer() → true
-        boolean r11 = history.deshacer();
-        System.out.println("11. deshacer() → " + r11);
+        System.out.println("11. deshacer() → " + history.deshacer());
         System.out.println("    Contenido: " + bf);
         System.out.println("    Deshacer: " + history.sizeDeshacer() + " | Rehacer: " + history.sizeRehacer());
         System.out.println();
         
         // PASO 12: deshacer() → false
-        boolean r12 = history.deshacer();
-        System.out.println("12. deshacer() → " + r12);
+        System.out.println("12. deshacer() → " + history.deshacer());
         System.out.println("    Contenido: " + bf);
         System.out.println("    Deshacer: " + history.sizeDeshacer() + " | Rehacer: " + history.sizeRehacer());
         System.out.println();
