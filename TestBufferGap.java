@@ -7,9 +7,9 @@ public class TestBufferGap {
         System.out.println("\n1.========================================================");
         /*
         * 1. nstancie un BufferGap<Character> y reproduzca exactamente la traza de las
-        * tablas anteriores, imprimiendo después de cada operación el contenido,
-        * inicioHueco, finHueco, la capacidad y el contador de desplazamientos. La salida
-        * tiene que coincidir con las tablas; si no coincide, hay un bug.
+        *    tablas anteriores, imprimiendo después de cada operación el contenido,
+        *    inicioHueco, finHueco, la capacidad y el contador de desplazamientos. La salida
+        *    tiene que coincidir con las tablas; si no coincide, hay un bug.
         */
 
         BufferGap<Character> bf = new BufferGap<Character>();
@@ -65,7 +65,7 @@ public class TestBufferGap {
         System.out.println("\n2.========================================================");
         /*
         * 2. Inserte 100.000 caracteres aleatorios al final y verifique con el iterador (for-each)
-        * que la cantidad y el orden son correctos.
+        *    que la cantidad y el orden son correctos.
         */
 
         System.out.println("moverCursor(2)");
@@ -104,17 +104,25 @@ public class TestBufferGap {
         System.out.println("\n3.========================================================");
         /*
         * 3. Conteo de desplazamientos en el medio. Con n caracteres ya cargados, ubique el
-        * cursor en n/2, reinicie el contador de desplazamientos e inserte 10.000 caracteres
-        * en esa posición. Reporte cuántos desplazamientos hizo la estructura. Repita para
-        * varios n con incrementos de 100.000, empezando de 100.000 hasta 1.000.000.
+        *    cursor en n/2, reinicie el contador de desplazamientos e inserte 10.000 caracteres
+        *    en esa posición. Reporte cuántos desplazamientos hizo la estructura. Repita para
+        *    varios n con incrementos de 100.000, empezando de 100.000 hasta 1.000.000.
         */
 
         /*
-        * EXPLICACIÓN DE RESULTADOS.
+        * ANÁLISIS DE RESULTADOS
         *
-        * BufferGap da 0 desplazamientos porque escribe directo en la celda libre del hueco (datos[inicioHueco])
-        * sin mover elementos vecinos. El arreglo simple requiere desplazar $N/2$ elementos a la derecha por
-        * cada una de las 10.000 inserciones, sumando $(N/2) \times 10.000$ movimientos físicos.
+        * 1. BufferGap (0 desplazamientos en inserción):
+        *    Al ubicar el cursor en N/2 mediante moverCursor(), el hueco queda posicionado en
+        *    esa celda física. Las 10.000 inserciones posteriores consumen directamente las
+        *    celdas libres del hueco (`datos[inicioHueco]`). Como el espacio ya estaba
+        *    disponible, NO se realiza ningún movimiento físico de celdas contiguas.
+        *
+        * 2. Arreglo Simple:
+        *    En un arreglo compacto tradicional, no existe el concepto de hueco. Insertar un
+        *    elemento en la posición N/2 obliga a desplazar todas las celdas desde N/2
+        *    hasta el final un lugar a la derecha. Para K=10.000 inserciones, se realizan
+        *    exactamente (N / 2) * K movimientos físicos de elementos.
         */
 
         for (int i = 1; i <= 10; i++) { // n = i*100.000

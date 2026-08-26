@@ -1,5 +1,19 @@
 /* comando para borrar caracteres en el bufferlist */
 
+/**
+ * ELEMENTOS GUARDADOS
+ *  > El caracter eliminado -> ( Character character )
+ *      es necesario para deshacer los cambios, ya que el caracter puede perderse
+ *      en la lista luego de ser borrado.
+ *
+ *  > La lista con buffer -> ( BufferGap<Character> buffer )
+ *      es necesario para que el programa sepa donde insertar el caracter
+ *
+ *  > El estado de la operacion -> ( boolean state )
+ *      es necesario para saber si se puede revertir o rehacer esta operacion, si aun no se ha
+ *      borrado el caracter no puedes rehacer la operacion por que todavia no lo
+ *      has hecho, esta variable sirve para controlar esto.
+ */
 public class ComandoBorrar implements Comando {
 
     private Character character;    // elemento a insertar
