@@ -17,12 +17,12 @@
 Decidimos agregar esta clase a modo de simplificar la interacción de la lista con historial para que maneje las llamadas a la clase `HistorialEdicion` creando las instancias necesarias de las clases heredadas de `Comando` para realizar cierta operación sin necesidad de realizar todo el proceso de forma manual, simplemente cree una instancia de `BufferHistoryManager` y mediante esa instancia realice las operaciones.
 
 ```diff
-< BufferGap<Character> **bf** = new BufferGap<>();
-< HistorialEdicion **history** = new HistorialEdicion();
-< **history**.ejecutar( new ComandoInsertar( **bf**, 'A') );
+< BufferGap<Character> bf = new BufferGap<>();
+< HistorialEdicion history = new HistorialEdicion();
+< history.ejecutar( new ComandoInsertar( bf, 'A') );
 
-> BufferHistoryManager **history** = new BufferHistoryManager( new BufferGap<Character>() );
-> **history**.insertar('A');
+> BufferHistoryManager history = new BufferHistoryManager( new BufferGap<Character>() );
+> history.insertar('A');
 ```
 
 ### **2. Ubicación del hueco al duplicar capacidad**
