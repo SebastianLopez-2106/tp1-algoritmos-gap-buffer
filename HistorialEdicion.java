@@ -42,11 +42,13 @@ public class HistorialEdicion {
 
     public boolean rehacer () {
         /*
-        *Vuelve a ejecutar el último comando deshecho y lo devuelve a la pila de deshacer.
+        * Vuelve a ejecutar el último comando deshecho y lo devuelve a la pila de deshacer.
         * Retorna false si no hay nada que rehacer.
         */
         if (pilaRehacer.size() > 0) {
-            pilaRehacer.desapilar().ejecutar();
+            Comando c = pilaRehacer.desapilar();
+            c.ejecutar();
+            pilaDeshacer.apilar(c);
             return true;
         }
 

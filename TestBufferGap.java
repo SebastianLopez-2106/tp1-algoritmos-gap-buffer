@@ -4,7 +4,7 @@ import java.util.Random;
 public class TestBufferGap {
     public static void main (String [] args) {
 
-        System.out.println("\n1.========================================================");
+        System.out.println("\n1 <========================================================>");
         /*
         * 1. nstancie un BufferGap<Character> y reproduzca exactamente la traza de las
         *    tablas anteriores, imprimiendo después de cada operación el contenido,
@@ -15,9 +15,8 @@ public class TestBufferGap {
         BufferGap<Character> bf = new BufferGap<Character>();
 
         // Fase A ============================================================>
-        System.out.println("-----------------------------------------------");
-        System.out.println("Fase A: Escribir Hola de corrido.");
-        System.out.println("-----------------------------------------------");
+        System.out.println("\n>  Fase A: Escribir Hola de corrido.\n");
+
 
         System.out.println("(Inicial)");
         showData(bf);
@@ -39,9 +38,9 @@ public class TestBufferGap {
         showData(bf);
 
         // Fase B ============================================================>
-        System.out.println("\n-----------------------------------------------");
-        System.out.println("Fase B: Volver atras y editar");
-        System.out.println("-----------------------------------------------");
+
+        System.out.println("\n\n>  Fase B: Volver atras y editar\n");
+
 
         System.out.println("moverCursor(-2)");
         bf.moverCursor(-2);
@@ -62,7 +61,7 @@ public class TestBufferGap {
 
 
 
-        System.out.println("\n2.========================================================");
+        System.out.println("\n\n\n2 <========================================================>\n");
         /*
         * 2. Inserte 100.000 caracteres aleatorios al final y verifique con el iterador (for-each)
         *    que la cantidad y el orden son correctos.
@@ -101,7 +100,7 @@ public class TestBufferGap {
 
 
 
-        System.out.println("\n3.========================================================");
+        System.out.println("\n\n\n3 <========================================================>\n");
         /*
         * 3. Conteo de desplazamientos en el medio. Con n caracteres ya cargados, ubique el
         *    cursor en n/2, reinicie el contador de desplazamientos e inserte 10.000 caracteres

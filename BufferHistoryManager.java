@@ -114,6 +114,13 @@ public class BufferHistoryManager {
     } // <-> end topeRehacer method
 
 
+    @Override
+    public String toString () {
+        return bf.toString();
+    }
+
+
+
     /**
      * retorna el buffer sobre el cual se esta trabajando
      * @return BufferGap<Character>
