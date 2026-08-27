@@ -5,7 +5,6 @@
 ### **Integrantes (Apellido, Nombre, CIC, Sección):**
 * [Apellido], [Nombre], [CIC], [Sección]
 * [Apellido], [Nombre], [CIC], [Sección]
-* [Apellido], [Nombre], [CIC], [Sección]
 
 ## Declaración de Honor
 *Declaramos bajo honor haber realizado este trabajo con honestidad académica, siguiendo las reglas establecidas en la primera clase de la materia, sin incurrir en copias ni apropiación de código de terceros no autorizados.*
